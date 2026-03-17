@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Server, 
-  Database, 
-  Code, 
-  MessageSquare, 
-  Layers, 
-  Cpu 
-} from 'lucide-react';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Server,
+  Database,
+  Code,
+  MessageSquare,
+  Layers,
+  Cpu,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,49 +21,61 @@ const Services = () => {
   const services = [
     {
       icon: Server,
-      title: 'Backend Development',
-      description: 'Build robust and scalable backend systems using Go (Golang) and Node.js with Clean Architecture principles.',
+      title: "Full Stack Development",
+      description:
+        "Build complete end-to-end applications from responsive frontends with React and Next.js to robust backends with Go and Node.js.",
     },
     {
       icon: Database,
-      title: 'Database Design',
-      description: 'Design and optimize database schemas using PostgreSQL, MongoDB, and Redis for high-performance applications.',
+      title: "Database Design",
+      description:
+        "Design and optimize database schemas using PostgreSQL, MongoDB, and Redis for high-performance applications.",
     },
     {
       icon: Code,
-      title: 'API Development',
-      description: 'Create RESTful and GraphQL APIs with proper documentation, authentication, and rate limiting.',
+      title: "API Development",
+      description:
+        "Create RESTful and GraphQL APIs with proper documentation, authentication, and rate limiting.",
     },
     {
       icon: MessageSquare,
-      title: 'Technical Consultation',
-      description: 'Provide expert advice on system architecture, technology stack selection, and best practices.',
+      title: "Frontend Development",
+      description:
+        "Create beautiful, responsive, and interactive user interfaces using React, Next.js, TypeScript, and Tailwind CSS.",
     },
     {
       icon: Layers,
-      title: 'Microservices',
-      description: 'Design and implement microservices architecture with message brokers like Kafka for scalable systems.',
+      title: "Full Stack Architecture",
+      description:
+        "Design and implement complete application architecture with modern frameworks, microservices, and message brokers.",
     },
     {
       icon: Cpu,
-      title: 'System Integration',
-      description: 'Integrate third-party services, payment gateways, and external APIs into your applications.',
+      title: "System Integration",
+      description:
+        "Integrate third-party services, payment gateways, and external APIs into your applications.",
     },
   ];
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
-    
+
     const ctx = gsap.context(() => {
       // Heading animation
       const headingTrigger = ScrollTrigger.create({
         trigger: headingRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            headingRef.current?.querySelectorAll('.animate-item') || [],
+            headingRef.current?.querySelectorAll(".animate-item") || [],
             { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power3.out",
+            },
           );
         },
         once: true,
@@ -73,17 +85,20 @@ const Services = () => {
       // SVG grid lines draw animation
       const svgTrigger = ScrollTrigger.create({
         trigger: gridRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
-          const paths = svgRef.current?.querySelectorAll('line');
+          const paths = svgRef.current?.querySelectorAll("line");
           paths?.forEach((path, i) => {
             const length = path.getTotalLength?.() || 100;
-            gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+            gsap.set(path, {
+              strokeDasharray: length,
+              strokeDashoffset: length,
+            });
             gsap.to(path, {
               strokeDashoffset: 0,
               duration: 1.5,
               delay: i * 0.1,
-              ease: 'power3.out',
+              ease: "power3.out",
             });
           });
         },
@@ -94,12 +109,19 @@ const Services = () => {
       // Cards fade up animation
       const cardsTrigger = ScrollTrigger.create({
         trigger: gridRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            gridRef.current?.querySelectorAll('.service-card') || [],
+            gridRef.current?.querySelectorAll(".service-card") || [],
             { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out', delay: 0.5 }
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+              delay: 0.5,
+            },
           );
         },
         once: true,
@@ -109,12 +131,19 @@ const Services = () => {
       // Icons pop in
       const iconsTrigger = ScrollTrigger.create({
         trigger: gridRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            gridRef.current?.querySelectorAll('.service-icon') || [],
+            gridRef.current?.querySelectorAll(".service-icon") || [],
             { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)', delay: 0.8 }
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.4,
+              stagger: 0.1,
+              ease: "back.out(1.7)",
+              delay: 0.8,
+            },
           );
         },
         once: true,
@@ -123,7 +152,7 @@ const Services = () => {
     }, sectionRef);
 
     return () => {
-      triggers.forEach(trigger => trigger.kill());
+      triggers.forEach((trigger) => trigger.kill());
       ctx.revert();
     };
   }, []);
@@ -144,7 +173,7 @@ const Services = () => {
             What I <span className="text-gradient">Offer</span>
           </h2>
           <p className="animate-item text-gray-400 text-base sm:text-lg max-w-2xl mx-auto opacity-0">
-            Services tailored to your backend development needs
+            Services tailored to your full stack development needs
           </p>
         </div>
 
@@ -157,11 +186,39 @@ const Services = () => {
             style={{ zIndex: 0 }}
           >
             {/* Horizontal lines */}
-            <line x1="0" y1="33%" x2="100%" y2="33%" stroke="rgba(107, 70, 193, 0.2)" strokeWidth="1" />
-            <line x1="0" y1="66%" x2="100%" y2="66%" stroke="rgba(107, 70, 193, 0.2)" strokeWidth="1" />
+            <line
+              x1="0"
+              y1="33%"
+              x2="100%"
+              y2="33%"
+              stroke="rgba(107, 70, 193, 0.2)"
+              strokeWidth="1"
+            />
+            <line
+              x1="0"
+              y1="66%"
+              x2="100%"
+              y2="66%"
+              stroke="rgba(107, 70, 193, 0.2)"
+              strokeWidth="1"
+            />
             {/* Vertical lines */}
-            <line x1="33%" y1="0" x2="33%" y2="100%" stroke="rgba(107, 70, 193, 0.2)" strokeWidth="1" />
-            <line x1="66%" y1="0" x2="66%" y2="100%" stroke="rgba(107, 70, 193, 0.2)" strokeWidth="1" />
+            <line
+              x1="33%"
+              y1="0"
+              x2="33%"
+              y2="100%"
+              stroke="rgba(107, 70, 193, 0.2)"
+              strokeWidth="1"
+            />
+            <line
+              x1="66%"
+              y1="0"
+              x2="66%"
+              y2="100%"
+              stroke="rgba(107, 70, 193, 0.2)"
+              strokeWidth="1"
+            />
           </svg>
 
           {/* Services Cards */}
@@ -185,11 +242,12 @@ const Services = () => {
                 </p>
 
                 {/* Hover gradient border effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-400 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10" 
-                  style={{ 
-                    backgroundSize: '200% 200%',
-                    animation: 'gradient-shift 3s ease infinite'
-                  }} 
+                <div
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-400 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"
+                  style={{
+                    backgroundSize: "200% 200%",
+                    animation: "gradient-shift 3s ease infinite",
+                  }}
                 />
               </div>
             ))}

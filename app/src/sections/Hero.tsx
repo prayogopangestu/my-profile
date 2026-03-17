@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Mail, Github } from 'lucide-react';
-import gsap from 'gsap';
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Mail, Github } from "lucide-react";
+import gsap from "gsap";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -17,27 +17,30 @@ const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Timeline for entrance animations
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       // Greeting animation
       tl.fromTo(
         greetingRef.current,
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8 },
-        0.2
+        0.2,
       );
 
       // Name animation with split characters
       if (nameRef.current) {
-        const chars = nameRef.current.innerText.split('');
+        const chars = nameRef.current.innerText.split("");
         nameRef.current.innerHTML = chars
-          .map((char) => `<span class="inline-block">${char === ' ' ? '&nbsp;' : char}</span>`)
-          .join('');
+          .map(
+            (char) =>
+              `<span class="inline-block">${char === " " ? "&nbsp;" : char}</span>`,
+          )
+          .join("");
         tl.fromTo(
-          nameRef.current.querySelectorAll('span'),
+          nameRef.current.querySelectorAll("span"),
           { y: 100, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8, stagger: 0.03 },
-          0.4
+          0.4,
         );
       }
 
@@ -45,8 +48,8 @@ const Hero = () => {
       tl.fromTo(
         titleRef.current,
         { width: 0, opacity: 1 },
-        { width: '100%', duration: 1, ease: 'steps(18)' },
-        0.8
+        { width: "100%", duration: 1, ease: "steps(18)" },
+        0.8,
       );
 
       // Description fade up
@@ -54,15 +57,21 @@ const Hero = () => {
         descRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8 },
-        1
+        1,
       );
 
       // Buttons scale up
       tl.fromTo(
         buttonsRef.current?.children || [],
         { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.7)' },
-        1.2
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        },
+        1.2,
       );
 
       // Hero image 3D float in
@@ -70,7 +79,7 @@ const Hero = () => {
         imageRef.current,
         { z: -500, opacity: 0, rotateY: -30 },
         { z: 0, opacity: 1, rotateY: 0, duration: 1.2 },
-        0.5
+        0.5,
       );
     }, heroRef);
 
@@ -87,8 +96,8 @@ const Hero = () => {
       setMousePosition({ x, y });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   // Apply parallax to image
@@ -98,7 +107,7 @@ const Hero = () => {
         rotateY: mousePosition.x * 10,
         rotateX: -mousePosition.y * 10,
         duration: 0.5,
-        ease: 'power2.out',
+        ease: "power2.out",
       });
     }
   }, [mousePosition]);
@@ -106,7 +115,7 @@ const Hero = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -115,11 +124,11 @@ const Hero = () => {
       ref={heroRef}
       id="hero"
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
-      style={{ perspective: '1000px' }}
+      style={{ perspective: "1000px" }}
     >
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark to-purple-900/20 animate-gradient" />
-      
+
       {/* Floating particles */}
       <div className="particles-container">
         {[...Array(20)].map((_, i) => (
@@ -136,52 +145,61 @@ const Hero = () => {
       </div>
 
       {/* Grid pattern overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `linear-gradient(rgba(107, 70, 193, 0.3) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(107, 70, 193, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
+          backgroundSize: "50px 50px",
         }}
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div ref={textRef} className="text-center lg:text-left order-2 lg:order-1">
+          <div
+            ref={textRef}
+            className="text-center lg:text-left order-2 lg:order-1"
+          >
             <span
               ref={greetingRef}
               className="inline-block text-purple-400 font-medium text-lg mb-4 opacity-0"
             >
               Hello, I'm
             </span>
-            
+
             <h1
               ref={nameRef}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 overflow-hidden"
             >
               Prayogo Pangestu
             </h1>
-            
+
             <p
               ref={titleRef}
               className="text-xl sm:text-2xl md:text-3xl font-display font-semibold text-gradient mb-6 whitespace-nowrap overflow-hidden inline-block"
             >
-              Backend Developer
+              Full Stack Developer
             </p>
-            
+
             <p
               ref={descRef}
               className="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-8 opacity-0"
             >
-              Passionate backend developer specializing in Go (Golang), Node.js, and Clean Architecture. I build scalable systems, RESTful APIs, and microservices that power modern applications.
+              Passionate full stack developer specializing in Go (Golang),
+              Node.js, React, and Next.js. I build complete end-to-end
+              applications from beautiful, responsive frontends to robust,
+              scalable backends.
             </p>
-            
-            <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+
+            <div
+              ref={buttonsRef}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
               <Button
                 size="lg"
                 className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 text-base font-medium rounded-full magnetic-btn animate-pulse-glow"
-                onClick={() => scrollToSection('projects')}
+                onClick={() => scrollToSection("projects")}
               >
                 <Github className="mr-2 w-5 h-5" />
                 View My Work
@@ -190,7 +208,7 @@ const Hero = () => {
                 size="lg"
                 variant="outline"
                 className="border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-6 text-base font-medium rounded-full magnetic-btn"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
               >
                 <Mail className="mr-2 w-5 h-5" />
                 Contact Me
@@ -199,11 +217,14 @@ const Hero = () => {
           </div>
 
           {/* Hero Image */}
-          <div className="order-1 lg:order-2 flex justify-center" style={{ perspective: '1000px' }}>
+          <div
+            className="order-1 lg:order-2 flex justify-center"
+            style={{ perspective: "1000px" }}
+          >
             <div
               ref={imageRef}
               className="relative w-full max-w-md lg:max-w-lg animate-float opacity-0"
-              style={{ transformStyle: 'preserve-3d' }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <img
                 src="/hero-illustration.jpg"

@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,35 +11,56 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: 'Backend',
-      skills: ['Go', 'Node.js', 'Express.js', 'Fiber', 'REST API', 'GraphQL', 'gRPC'],
-      color: 'from-blue-500 to-purple-600',
+      title: "Full Stack",
+      skills: [
+        "Go",
+        "Node.js",
+        "Express.js",
+        "Fiber",
+        "REST API",
+        "GraphQL",
+        "Next.js",
+      ],
+      color: "from-blue-500 to-purple-600",
     },
     {
-      title: 'Frontend',
-      skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'],
-      color: 'from-purple-500 to-purple-700',
+      title: "Frontend",
+      skills: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "HTML/CSS",
+      ],
+      color: "from-purple-500 to-purple-700",
     },
     {
-      title: 'Database & Tools',
-      skills: ['PostgreSQL', 'MongoDB', 'Kafka', 'Docker', 'Git', 'Redis'],
-      color: 'from-purple-600 to-pink-500',
+      title: "Database & Tools",
+      skills: ["PostgreSQL", "MongoDB", "Kafka", "Docker", "Git", "Redis"],
+      color: "from-purple-600 to-pink-500",
     },
   ];
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
-    
+
     const ctx = gsap.context(() => {
       // Heading animation
       const headingTrigger = ScrollTrigger.create({
         trigger: headingRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            headingRef.current?.querySelectorAll('.word') || [],
-            { y: '100%', opacity: 0 },
-            { y: '0%', opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+            headingRef.current?.querySelectorAll(".word") || [],
+            { y: "100%", opacity: 0 },
+            {
+              y: "0%",
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power3.out",
+            },
           );
         },
         once: true,
@@ -49,12 +70,18 @@ const Skills = () => {
       // Clusters implosion animation
       const clustersTrigger = ScrollTrigger.create({
         trigger: clustersRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            clustersRef.current?.querySelectorAll('.skill-cluster') || [],
+            clustersRef.current?.querySelectorAll(".skill-cluster") || [],
             { scale: 2, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.2,
+              ease: "power3.out",
+            },
           );
         },
         once: true,
@@ -62,7 +89,7 @@ const Skills = () => {
       triggers.push(clustersTrigger);
 
       // Floating animation for skill tags
-      const tags = clustersRef.current?.querySelectorAll('.skill-tag-float');
+      const tags = clustersRef.current?.querySelectorAll(".skill-tag-float");
       tags?.forEach((tag, i) => {
         gsap.to(tag, {
           y: `${Math.sin(i) * 10}`,
@@ -70,14 +97,14 @@ const Skills = () => {
           duration: 3 + Math.random() * 2,
           repeat: -1,
           yoyo: true,
-          ease: 'sine.inOut',
+          ease: "sine.inOut",
           delay: i * 0.1,
         });
       });
     }, sectionRef);
 
     return () => {
-      triggers.forEach(trigger => trigger.kill());
+      triggers.forEach((trigger) => trigger.kill());
       ctx.revert();
     };
   }, []);
@@ -95,7 +122,7 @@ const Skills = () => {
         {/* Section Heading */}
         <div ref={headingRef} className="text-center mb-16 lg:mb-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 overflow-hidden">
-            <span className="word inline-block">My</span>{' '}
+            <span className="word inline-block">My</span>{" "}
             <span className="word inline-block text-gradient">Skills</span>
           </h2>
           <p className="word text-gray-400 text-base sm:text-lg max-w-2xl mx-auto opacity-0">
@@ -115,10 +142,14 @@ const Skills = () => {
             >
               {/* Category Title */}
               <div className="mb-6 text-center">
-                <h3 className={`text-xl font-bold bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
+                <h3
+                  className={`text-xl font-bold bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}
+                >
                   {category.title}
                 </h3>
-                <div className={`w-16 h-1 bg-gradient-to-r ${category.color} rounded-full mx-auto mt-2`} />
+                <div
+                  className={`w-16 h-1 bg-gradient-to-r ${category.color} rounded-full mx-auto mt-2`}
+                />
               </div>
 
               {/* Skills Cloud */}

@@ -1,7 +1,14 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Github, Linkedin, Twitter, Instagram, Heart, ArrowUp } from 'lucide-react';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Heart,
+  ArrowUp,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,30 +17,40 @@ const Footer = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/prayogopangestu', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+    {
+      icon: Github,
+      href: "https://github.com/prayogopangestu",
+      label: "GitHub",
+    },
+    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
   ];
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Services', href: '#services' },
-    { label: 'Contact', href: '#contact' },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: footerRef.current,
-        start: 'top 90%',
+        start: "top 90%",
         onEnter: () => {
           gsap.fromTo(
-            contentRef.current?.querySelectorAll('.footer-item') || [],
+            contentRef.current?.querySelectorAll(".footer-item") || [],
             { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+            },
           );
         },
         once: true,
@@ -44,13 +61,13 @@ const Footer = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -62,7 +79,10 @@ const Footer = () => {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-purple-900/10 to-transparent" />
 
-      <div ref={contentRef} className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
+      <div
+        ref={contentRef}
+        className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10"
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-12">
           {/* Brand */}
           <div className="footer-item opacity-0">
@@ -70,7 +90,8 @@ const Footer = () => {
               Prayogo<span className="text-purple-400">.</span>
             </h3>
             <p className="text-gray-400 text-sm mb-6 max-w-xs">
-              Backend Developer passionate about building scalable systems with Go and Node.js.
+              Full Stack Developer passionate about building complete end-to-end
+              applications with Go, Node.js, React, and Next.js.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -120,7 +141,9 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="footer-item pt-8 border-t border-purple-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 opacity-0">
           <p className="text-gray-400 text-sm flex items-center">
-            Made with <Heart className="w-4 h-4 text-red-500 mx-1 fill-red-500" /> by Prayogo Pangestu
+            Made with{" "}
+            <Heart className="w-4 h-4 text-red-500 mx-1 fill-red-500" /> by
+            Prayogo Pangestu
           </p>
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} All rights reserved.

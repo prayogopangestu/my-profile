@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Code2, Briefcase, FolderGit } from 'lucide-react';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Code2, Briefcase, FolderGit } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,24 +13,29 @@ const About = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   const stats = [
-    { icon: FolderGit, value: '16+', label: 'Repositories' },
-    { icon: Code2, value: '6+', label: 'Technologies' },
-    { icon: Briefcase, value: '5+', label: 'Projects' },
+    { icon: FolderGit, value: "16+", label: "Repositories" },
+    { icon: Code2, value: "6+", label: "Technologies" },
+    { icon: Briefcase, value: "5+", label: "Projects" },
   ];
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
-    
+
     const ctx = gsap.context(() => {
       // Heading reveal animation
       const headingTrigger = ScrollTrigger.create({
         trigger: headingRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
             headingRef.current,
-            { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
-            { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 0.8, ease: 'power3.out' }
+            { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+            {
+              clipPath: "inset(0 0% 0 0)",
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+            },
           );
         },
         once: true,
@@ -40,12 +45,12 @@ const About = () => {
       // Image scale and reveal
       const imageTrigger = ScrollTrigger.create({
         trigger: imageRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
             imageRef.current,
             { scale: 1.2, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 1, ease: 'power3.out' }
+            { scale: 1, opacity: 1, duration: 1, ease: "power3.out" },
           );
         },
         once: true,
@@ -55,12 +60,19 @@ const About = () => {
       // Text content stagger
       const textTrigger = ScrollTrigger.create({
         trigger: textRef.current,
-        start: 'top 80%',
+        start: "top 80%",
         onEnter: () => {
           gsap.fromTo(
-            textRef.current?.querySelectorAll('.text-line') || [],
+            textRef.current?.querySelectorAll(".text-line") || [],
             { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out', delay: 0.4 }
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+              delay: 0.4,
+            },
           );
         },
         once: true,
@@ -70,12 +82,19 @@ const About = () => {
       // Stats cards fly in
       const statsTrigger = ScrollTrigger.create({
         trigger: statsRef.current,
-        start: 'top 85%',
+        start: "top 85%",
         onEnter: () => {
           gsap.fromTo(
-            statsRef.current?.querySelectorAll('.stat-card') || [],
+            statsRef.current?.querySelectorAll(".stat-card") || [],
             { x: 100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.6 }
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power3.out",
+              delay: 0.6,
+            },
           );
         },
         once: true,
@@ -85,18 +104,18 @@ const About = () => {
       // Parallax effect on image
       gsap.to(imageRef.current, {
         y: -50,
-        ease: 'none',
+        ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
+          start: "top bottom",
+          end: "bottom top",
           scrub: 1,
         },
       });
     }, sectionRef);
 
     return () => {
-      triggers.forEach(trigger => trigger.kill());
+      triggers.forEach((trigger) => trigger.kill());
       ctx.revert();
     };
   }, []);
@@ -140,18 +159,38 @@ const About = () => {
           {/* Content */}
           <div ref={textRef} className="space-y-6">
             <p className="text-line text-gray-300 text-base sm:text-lg leading-relaxed opacity-0">
-              I'm a passionate backend developer with strong expertise in Go (Golang) and Node.js. My focus is on building robust, scalable, and maintainable systems using Clean Architecture principles.
+              I'm a passionate full stack developer with strong expertise in Go
+              (Golang), Node.js, React, and Next.js. My focus is on building
+              complete, end-to-end solutions from responsive frontends to robust
+              backends using modern technologies and best practices.
             </p>
             <p className="text-line text-gray-300 text-base sm:text-lg leading-relaxed opacity-0">
-              I have experience developing various applications including e-commerce platforms, budget tracking systems, task management tools, and workflow automation systems. I love working with modern technologies like Fiber, PostgreSQL, Kafka, and the MERN stack.
+              I have experience developing various applications including
+              e-commerce platforms, budget tracking systems, task management
+              tools, and workflow automation systems. I love working with the
+              full technology stack - from creating beautiful, interactive UIs
+              with React and Next.js to building scalable APIs with Go and
+              Node.js.
             </p>
             <p className="text-line text-gray-300 text-base sm:text-lg leading-relaxed opacity-0">
-              When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and continuously learning to improve my craft. I believe in writing clean, testable code that stands the test of time.
+              When I'm not coding, I enjoy exploring new technologies,
+              contributing to open-source projects, and continuously learning to
+              improve my craft. I believe in writing clean, testable code that
+              stands the test of time.
             </p>
 
             {/* Skills tags */}
             <div className="text-line flex flex-wrap gap-2 pt-4 opacity-0">
-              {['Go', 'Node.js', 'React', 'TypeScript', 'PostgreSQL', 'MongoDB', 'Kafka', 'Fiber'].map((skill) => (
+              {[
+                "Go",
+                "Node.js",
+                "React",
+                "TypeScript",
+                "PostgreSQL",
+                "MongoDB",
+                "Kafka",
+                "Fiber",
+              ].map((skill) => (
                 <span
                   key={skill}
                   className="px-4 py-2 bg-purple-600/20 text-purple-300 rounded-full text-sm font-medium border border-purple-500/30 skill-tag"
@@ -172,7 +211,7 @@ const About = () => {
             <div
               key={index}
               className="stat-card glass-card rounded-xl p-6 text-center opacity-0 hover:transform hover:scale-105 transition-all duration-300"
-              style={{ perspective: '1000px' }}
+              style={{ perspective: "1000px" }}
             >
               <div className="flex justify-center mb-4">
                 <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center">
